@@ -10,14 +10,17 @@ import UIKit
 
 protocol Explodable {}
 
-private let goldenRatio = CGFloat(0.625)
-private let explodeDuration = Double(goldenRatio)
-private let explodaAngle = CGFloat(M_PI)*goldenRatio
-private let splitRatio = CGFloat(10)
-
+/**
+ The explode direction of the animation
+ - Top: The fragment will explode upward
+ - Left: The fragment will explode leftward
+ - Right: The fragment will explode rightward
+ - Bottom: The fragment will explode downward
+ - Chaos: The fragment will explode randomly
+ */
 enum ExplodeDirection {
   case Top, Left, Bottom, Right, Chaos
-  func explodeDirection(offset:CGSize) -> CGVector {
+  private func explodeDirection(offset:CGSize) -> CGVector {
     switch self {
     case .Top:
       let xOffset = random(from: -16.8, to: 16.8)
@@ -45,10 +48,22 @@ enum ExplodeDirection {
 
 extension Explodable where Self:UIView {
   
+  /**
+   Explode a view using the specified duration and direction
+   - Parameter duration: The animation duration
+   - Parameter direction: The explode direction, default is `ExplodeDirection.Chaos`
+   */
   func explode(direction:ExplodeDirection = .Chaos, duration:Double) {
     explode(direction, duration: duration) {}
   }
-  func explode(direction:ExplodeDirection = .Chaos, duration:Double, complete:(()->Void)) {
+  
+  /**
+   Explode a view using the specified duration ,direction and completion handler
+   - Parameter duration: The total duration of the animation
+   - Parameter direction: The explode direction, default is `ExplodeDirection.Chaos`
+   - Parameter completion: A closure to be executed when the animation sequence ends.
+   */
+  func explode(direction:ExplodeDirection = .Chaos, duration:Double, completion:(()->Void)) {
     
     guard let containerView = self.superview else { fatalError() }
     let fragments = generateFragmentsFrom(self, with: splitRatio, in: containerView)
@@ -78,33 +93,23 @@ extension Explodable where Self:UIView {
         }
         self.removeFromSuperview()
         self.alpha = 1
-        complete()
+        completion()
       })
   }
   
 }
 
-extension UITableView {
-  
-  private struct AssociatedKeys {
-    static var associatedName = "exploding"
-  }
-  
-  var exploding:Bool {
-    get {
-      guard let exploding = objc_getAssociatedObject(self, &AssociatedKeys.associatedName) as? Bool else { return false }
-      return exploding
-    }
-    set {
-      objc_setAssociatedObject(self, &AssociatedKeys.associatedName, newValue as Bool, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-    }
-  }
-  
-}
 
 extension Explodable where Self:UITableView {
   
-  func explodeRowAtIndexPath(indexPath:NSIndexPath, duration:Double, direction:ExplodeDirection = .Chaos, complete:()->Void) {
+  /**
+   Remove a row in tableView with explosion animation
+   - Parameter indexPath: An indexPath locate a row in _tableView_
+   - Parameter duration: The total duration of the animation
+   - Parameter direction: The explode direction, default is _ExplodeDirection.Chaos_
+   - Parameter completion: A closure to be executed when the animation sqquence ends, also you should update the dataSource here
+   */
+  func explodeRowAtIndexPath(indexPath:NSIndexPath, duration:Double, direction:ExplodeDirection = .Chaos, completion:()->Void) {
     
     if self.exploding == true {
       return
@@ -141,7 +146,7 @@ extension Explodable where Self:UITableView {
           $0.removeFromSuperview()
         }
         
-        complete()
+        completion()
         
         CATransaction.begin()
         CATransaction.setCompletionBlock {
@@ -156,6 +161,30 @@ extension Explodable where Self:UITableView {
   }
   
 }
+
+// MARK: - Private Stuff
+
+/// Add a `explosing` variation to UITableView in runtime
+private extension UITableView {
+  
+  private struct AssociatedKeys {
+    static var associatedName = "exploding"
+  }
+  
+  private var exploding:Bool {
+    get {
+      guard let exploding = objc_getAssociatedObject(self, &AssociatedKeys.associatedName) as? Bool else { return false }
+      return exploding
+    }
+    set {
+      objc_setAssociatedObject(self, &AssociatedKeys.associatedName, newValue as Bool, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+  }
+  
+}
+
+private let goldenRatio = CGFloat(0.625)
+private let splitRatio = CGFloat(10)
 
 private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, in containerView:UIView) -> [UIView] {
   
@@ -181,7 +210,6 @@ private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, i
   return fragments
   
 }
-
 private func random(from lowerBound:CGFloat, to upperBound:CGFloat) -> CGFloat {
   return CGFloat(arc4random_uniform(UInt32(upperBound - lowerBound))) + lowerBound
 }
