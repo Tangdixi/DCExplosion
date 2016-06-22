@@ -1,8 +1,8 @@
 #DCExplosion
 
-![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/Demo.gif)
+![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/Explosion.gif)
 
-**DCExplosion** allow you to remove a view with explode animation. Written in Swift and implement through Protocol Oriented Progrmming
+**DCExplosion** allow you to remove a view with explode animation. Written in Swift, using [Protocol-Oriented Programming](https://developer.apple.com/videos/play/wwdc2015/408/)
 
 ## How To Get Started  
 - Download [**DCExplosion**](https://codeload.github.com/Tangdixi/DCExplosion/zip/master)
