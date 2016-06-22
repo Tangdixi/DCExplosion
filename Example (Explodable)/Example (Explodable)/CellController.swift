@@ -23,7 +23,7 @@ class CellController: UIViewController, Explodable {
   }
 
   @IBAction func refreshTapped(sender: AnyObject) {
-    data = ["1", "2", "3", "4", "5"]
+    data = ["1", "2", "3", "4", "5", "6"]
     tableView.reloadData()
   }
   
@@ -40,7 +40,7 @@ extension CellController:UITableViewDelegate {
 extension CellController:UITableViewDataSource {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Bottom) {
+    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Chaos) {
       data.removeAtIndex(indexPath.row)
     }
   }

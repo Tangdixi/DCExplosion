@@ -106,8 +106,6 @@ extension Explodable where Self:UITableView {
   
   func explodeRowAtIndexPath(indexPath:NSIndexPath, duration:Double, direction:ExplodeDirection = .Chaos, complete:()->Void) {
     
-    print("Exploding: \(self.exploding)")
-    
     if self.exploding == true {
       return
     }
@@ -144,8 +142,14 @@ extension Explodable where Self:UITableView {
         }
         
         complete()
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+          cell.contentView.alpha = 1
+        }
         self.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-        cell.contentView.alpha = 1
+        CATransaction.commit()
+        
         self.exploding = false
     })
     
@@ -159,8 +163,11 @@ private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, i
   let snapshots = originView.snapshotViewAfterScreenUpdates(true)
   var fragments = [UIView]()
   
-  for x in 0.0.stride(to: Double(size.width), by: Double(size.width/splitRatio)) {
-    for y in 0.0.stride(to: Double(size.height), by: Double(size.width/splitRatio)) {
+  let shortSide = min(size.width, size.height)
+  let gap = max(20, shortSide/splitRatio)
+  
+  for x in 0.0.stride(to: Double(size.width), by: Double(gap)) {
+    for y in 0.0.stride(to: Double(size.height), by: Double(gap)) {
 
       let fragmentRect = CGRect(x: CGFloat(x), y: CGFloat(y), width: size.width/splitRatio, height: size.width/splitRatio)
       let fragment = snapshots.resizableSnapshotViewFromRect(fragmentRect, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsMake(1, 1, 1, 1))
