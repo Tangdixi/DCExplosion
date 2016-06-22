@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2Kx-7W-Ooc">
-                                <rect key="frame" x="155" y="361" width="290" height="29"/>
+                                <rect key="frame" x="155" y="396" width="290" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="BiR-cy-0Vu"/>
                                     <constraint firstAttribute="width" constant="290" id="g9R-ui-uKA"/>
@@ -89,7 +89,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPM-AC-mGU">
-                                <rect key="frame" x="268" y="456" width="64" height="30"/>
+                                <rect key="frame" x="268" y="491" width="64" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="89P-uY-s3H"/>
                                     <constraint firstAttribute="width" constant="64" id="tsE-l3-J0w"/>
@@ -102,7 +102,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.59999999999999998" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="7ne-dp-XKK">
-                                <rect key="frame" x="153" y="418" width="294" height="31"/>
+                                <rect key="frame" x="153" y="453" width="294" height="31"/>
                                 <color key="tintColor" red="1" green="0.27450980392156865" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1lj-Mq-9un"/>
@@ -133,7 +133,7 @@
                             <constraint firstAttribute="trailing" secondItem="2Hg-Zr-Igb" secondAttribute="trailing" constant="180" id="gJq-eq-TF8"/>
                             <constraint firstItem="2Kx-7W-Ooc" firstAttribute="top" secondItem="2Hg-Zr-Igb" secondAttribute="bottom" constant="20" id="gyU-Ks-Uhh"/>
                             <constraint firstItem="2Kx-7W-Ooc" firstAttribute="centerX" secondItem="YSs-wk-MC6" secondAttribute="centerX" id="jMR-jK-AfM"/>
-                            <constraint firstItem="2Kx-7W-Ooc" firstAttribute="top" secondItem="2Hg-Zr-Igb" secondAttribute="bottom" constant="20" id="jmM-ew-5ZY"/>
+                            <constraint firstItem="2Kx-7W-Ooc" firstAttribute="top" secondItem="2Hg-Zr-Igb" secondAttribute="bottom" constant="55" id="jmM-ew-5ZY"/>
                             <constraint firstItem="2Hg-Zr-Igb" firstAttribute="top" secondItem="fhS-dO-7cs" secondAttribute="bottom" constant="37" id="wI7-cB-V1e"/>
                         </constraints>
                         <variation key="default">

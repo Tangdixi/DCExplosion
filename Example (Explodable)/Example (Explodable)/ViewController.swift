@@ -40,7 +40,6 @@ class ViewController: UIViewController {
     imageView.explode(direction, duration: duration) {
       self.bottomView.addSubview(self.imageView)
     }
-    imageView.explode(.Chaos, duration: 2)
   }
   
 }
