@@ -56,5 +56,5 @@ Just open an [issue](https://github.com/Tangdixi/DCQRCode/issues) ~
 
 ##License
 
-** DCExplosion** is available under the MIT license. See the LICENSE file for more info.
+**DCExplosion** is available under the MIT license. See the LICENSE file for more info.
 
