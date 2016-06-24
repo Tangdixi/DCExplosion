@@ -99,7 +99,6 @@ extension Explodable where Self:UIView {
   
 }
 
-
 extension Explodable where Self:UITableView {
   
   /**
