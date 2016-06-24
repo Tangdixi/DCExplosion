@@ -1,12 +1,12 @@
 #DCExplosion
 
-![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/Demo.gif)
+![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/Explosion.gif)
 
-**DCExplosion** allow you to remove a view with explode animation. Written in Swift and implement through Protocol Oriented Progrmming
+**DCExplosion** allow you to remove a view with explode animation. Written in Swift, using [Protocol-Oriented Programming](https://developer.apple.com/videos/play/wwdc2015/408/)
 
 ## How To Get Started  
 - Download [**DCExplosion**](https://codeload.github.com/Tangdixi/DCExplosion/zip/master)
-- Clone ** DCExplosion**
+- Clone **DCExplosion**
 ```bash
 git clone git@github.com:Tangdixi/DCExplosion.git
 ``` 
@@ -21,28 +21,26 @@ Well, it is strongly recommended that you install via [**CocoaPods**](https://co
 ```swift
 extension UIView:Explodable { }
 ```
-* Explode the view
+* Explode a view and remove it from superView
 ```swift
 yourView.explode(duration: 1)
 ```
-* Change the direction 
+* Explode a view and remove it from superView using the specified direction
 ```swift
 imageView.explode(.Chaos, duration: 1)
 ```
-* Complete callback
+* Explode a view and remove it from superView using the specified direction and completion handler
 ```swift
 imageView.explode(.Chaos, duration: 1) {
 	// do something here ...
 }
 ```
-* TableViewCell  
+* Explode a TableViewCell and delete it from UITableView using the specified direction and completion handler
 ```swift
 tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Chaos) {
       dataSource.removeAtIndex(indexPath.row)
-    }
+}
 ```  
-
-More detail in **Example Project**
 
 ##Documentation
 **Documentation** is added into the source file.  
@@ -50,7 +48,7 @@ You can use `option` and click the keyword in **Xcode**
 
 ##Bug, Suggestions
 
-All you need is open an [issue](https://github.com/Tangdixi/DCQRCode/issues), I'll answer it ASAP !
+Just open an [issue](https://github.com/Tangdixi/DCQRCode/issues) ~ 
 
 ##TODO
 *  Remove a UICollectionCell with explode animation
@@ -58,5 +56,5 @@ All you need is open an [issue](https://github.com/Tangdixi/DCQRCode/issues), I'
 
 ##License
 
-** DCExplosion** is available under the MIT license. See the LICENSE file for more info.
+**DCExplosion** is available under the MIT license. See the LICENSE file for more info.
 
