@@ -43,16 +43,15 @@ tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Chaos) {
 ```  
 
 ##Documentation
-**Documentation** is added into the source file.  
-You can use `option` and click the keyword in **Xcode**   
+**Xcode Quick Help Documentation Supported** 
 
 ##Bug, Suggestions
 
-Just open an [issue](https://github.com/Tangdixi/DCQRCode/issues) ~ 
+Just open an [issue](https://github.com/Tangdixi/DCExplosion/issues) ~ 
 
 ##TODO
 *  Remove a UICollectionCell with explode animation
-*  More than explosion maybe
+*  More than explosion style
 
 ##License
 
