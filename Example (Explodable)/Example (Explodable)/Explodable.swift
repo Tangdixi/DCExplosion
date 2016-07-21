@@ -69,7 +69,6 @@ extension Explodable where Self:UIView {
     let fragments = generateFragmentsFrom(self, with: splitRatio, in: containerView)
     self.alpha = 0
     
-    
     UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseOut,
       animations: {
         fragments.forEach {
@@ -122,7 +121,7 @@ extension Explodable where Self:UITableView {
     let fragments = generateFragmentsFrom(cell, with: 10, in: cell)
     cell.contentView.alpha = 0
     
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseOut,
+    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveLinear,
       animations: {
         self.exploding = true
         fragments.forEach {
@@ -188,7 +187,7 @@ private let splitRatio = CGFloat(10)
 private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, in containerView:UIView) -> [UIView] {
   
   let size = originView.frame.size
-  let snapshots = originView.snapshotViewAfterScreenUpdates(true)
+  let snapshots = originView.snapshotViewAfterScreenUpdates(false)
   var fragments = [UIView]()
   
   let shortSide = min(size.width, size.height)
@@ -198,7 +197,8 @@ private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, i
     for y in 0.0.stride(to: Double(size.height), by: Double(gap)) {
 
       let fragmentRect = CGRect(x: CGFloat(x), y: CGFloat(y), width: size.width/splitRatio, height: size.width/splitRatio)
-      let fragment = snapshots.resizableSnapshotViewFromRect(fragmentRect, afterScreenUpdates: true, withCapInsets: UIEdgeInsetsMake(1, 1, 1, 1))
+      let fragment = snapshots.resizableSnapshotViewFromRect(fragmentRect, afterScreenUpdates: false, withCapInsets: UIEdgeInsetsZero)
+      
       fragment.frame = originView.convertRect(fragmentRect, toView: containerView)
       containerView.addSubview(fragment)
       fragments.append(fragment)
