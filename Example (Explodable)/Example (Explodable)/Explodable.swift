@@ -187,7 +187,7 @@ private let splitRatio = CGFloat(10)
 private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, in containerView:UIView) -> [UIView] {
   
   let size = originView.frame.size
-  let snapshots = originView.snapshotViewAfterScreenUpdates(false)
+  let snapshots = originView.snapshotViewAfterScreenUpdates(true)
   var fragments = [UIView]()
   
   let shortSide = min(size.width, size.height)

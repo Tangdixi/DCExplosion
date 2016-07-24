@@ -10,12 +10,18 @@ import UIKit
 
 class ImageViewController: UIViewController {
   
+  let directions = [ExplodeDirection.Top, ExplodeDirection.Bottom, ExplodeDirection.Left, ExplodeDirection.Right, ExplodeDirection.Chaos]
   
   @IBOutlet weak var frontImageView: UIImageView!
   
   @IBAction func crashTapped(sender: AnyObject) {
     
-    frontImageView?.explode(.Chaos, duration: 4)
+    let randomDirection = Int(arc4random_uniform(UInt32(4 - 0)) + 0)
+    let direction = directions[randomDirection]
+    
+    frontImageView?.explode(direction, duration: 4) {
+      self.navigationController?.popViewControllerAnimated(true)
+    }
     
   }
   
