@@ -13,6 +13,7 @@
 		812E6F8A1D06C59C00184E2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 812E6F891D06C59C00184E2D /* Assets.xcassets */; };
 		812E6F8D1D06C59C00184E2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 812E6F8B1D06C59C00184E2D /* LaunchScreen.storyboard */; };
 		812E6F951D06C5AD00184E2D /* Explodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812E6F941D06C5AD00184E2D /* Explodable.swift */; };
+		8157577B1D4159290005B59A /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8157577A1D4159290005B59A /* ImageViewController.swift */; };
 		8180C7F91D1449F8005BA724 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8180C7F81D1449F8005BA724 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		812E6F8C1D06C59C00184E2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		812E6F8E1D06C59C00184E2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		812E6F941D06C5AD00184E2D /* Explodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Explodable.swift; sourceTree = "<group>"; };
+		8157577A1D4159290005B59A /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		8180C7F81D1449F8005BA724 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 				812E6F821D06C59C00184E2D /* AppDelegate.swift */,
 				812E6F841D06C59C00184E2D /* CellController.swift */,
 				8180C7F81D1449F8005BA724 /* ViewController.swift */,
+				8157577A1D4159290005B59A /* ImageViewController.swift */,
 				812E6F941D06C5AD00184E2D /* Explodable.swift */,
 				812E6F861D06C59C00184E2D /* Main.storyboard */,
 				812E6F891D06C59C00184E2D /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8157577B1D4159290005B59A /* ImageViewController.swift in Sources */,
 				812E6F851D06C59C00184E2D /* CellController.swift in Sources */,
 				812E6F951D06C5AD00184E2D /* Explodable.swift in Sources */,
 				8180C7F91D1449F8005BA724 /* ViewController.swift in Sources */,
