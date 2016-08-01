@@ -19,7 +19,7 @@ class ImageViewController: UIViewController {
     let randomDirection = Int(arc4random_uniform(UInt32(4 - 0)) + 0)
     let direction = directions[randomDirection]
     
-    frontImageView?.explode(direction, duration: 4) {
+    frontImageView?.explode(direction, duration: 3) {
       self.navigationController?.popViewControllerAnimated(true)
     }
     
