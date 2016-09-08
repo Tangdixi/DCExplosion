@@ -1,6 +1,6 @@
 #DCExplosion
 
-![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/Explosion.gif)
+![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/DCExplosion.gif)
 
 **DCExplosion** allow you to remove a view with explode animation. Written in Swift, using [Protocol-Oriented Programming](https://developer.apple.com/videos/play/wwdc2015/408/)
 
