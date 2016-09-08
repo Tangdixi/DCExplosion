@@ -40,7 +40,7 @@ extension CellController:UITableViewDelegate {
 extension CellController:UITableViewDataSource {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Chaos) {
+    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Right) {
       data.removeAtIndex(indexPath.row)
     }
   }
