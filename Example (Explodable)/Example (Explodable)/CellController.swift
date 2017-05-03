@@ -22,7 +22,7 @@ class CellController: UIViewController, Explodable {
     data = ["1", "2", "3", "4", "5"]
   }
 
-  @IBAction func refreshTapped(sender: AnyObject) {
+  @IBAction func refreshTapped(_ sender: AnyObject) {
     data = ["1", "2", "3", "4", "5", "6"]
     tableView.reloadData()
   }
@@ -31,7 +31,7 @@ class CellController: UIViewController, Explodable {
 
 extension CellController:UITableViewDelegate {
   
-  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     return UIView()
   }
   
@@ -39,24 +39,24 @@ extension CellController:UITableViewDelegate {
 
 extension CellController:UITableViewDataSource {
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Right) {
-      data.removeAtIndex(indexPath.row)
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .right) {
+      data.remove(at: indexPath.row)
     }
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     cell.imageView?.image = UIImage(named: "image")
     cell.textLabel?.text = data[indexPath.row]
     return cell
   }
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return data.count
   }
   
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   

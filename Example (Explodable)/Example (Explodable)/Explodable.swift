@@ -19,26 +19,26 @@ protocol Explodable {}
  - Chaos: The fragment will explode randomly
  */
 enum ExplodeDirection {
-  case Top, Left, Bottom, Right, Chaos
-  private func explodeDirection(offset:CGSize) -> CGVector {
+  case top, left, bottom, right, chaos
+  fileprivate func explodeDirection(_ offset:CGSize) -> CGVector {
     switch self {
-    case .Top:
+    case .top:
       let xOffset = random(from: -16.8, to: 16.8)
       let yOffset = random(from: -offset.height*goldenRatio, to: 0)
       return CGVector(dx: xOffset, dy: yOffset)
-    case .Left:
+    case .left:
       let xOffset = random(from: -offset.width*goldenRatio, to: 0)
       let yOffset = random(from: -16.8, to: 16.8)
       return CGVector(dx: xOffset, dy: yOffset)
-    case .Bottom:
+    case .bottom:
       let xOffset = random(from: -16.8, to: 16.8)
       let yOffset = random(from: 0, to: offset.height*goldenRatio)
       return CGVector(dx: xOffset, dy: yOffset)
-    case .Right:
+    case .right:
       let xOffset = random(from: 0, to: offset.width*goldenRatio)
       let yOffset = random(from: -16.8, to: 16.8)
       return CGVector(dx: xOffset, dy: yOffset)
-    case .Chaos:
+    case .chaos:
       let xOffset = random(from: -offset.width*goldenRatio, to: offset.width*goldenRatio)
       let yOffset = random(from: -offset.height*goldenRatio, to: offset.height*goldenRatio)
       return CGVector(dx: xOffset, dy: yOffset)
@@ -53,7 +53,7 @@ extension Explodable where Self:UIView {
    - Parameter duration: The animation duration
    - Parameter direction: The explode direction, default is `ExplodeDirection.Chaos`
    */
-  func explode(direction:ExplodeDirection = .Chaos, duration:Double) {
+  func explode(_ direction:ExplodeDirection = .chaos, duration:Double) {
     explode(direction, duration: duration) {}
   }
   
@@ -63,13 +63,13 @@ extension Explodable where Self:UIView {
    - Parameter direction: The explode direction, default is `ExplodeDirection.Chaos`
    - Parameter completion: A closure to be executed when the animation sequence ends.
    */
-  func explode(direction:ExplodeDirection = .Chaos, duration:Double, completion:(()->Void)) {
+  func explode(_ direction:ExplodeDirection = .chaos, duration:Double, completion:@escaping (()->Void)) {
     
     guard let containerView = self.superview else { fatalError() }
     let fragments = generateFragmentsFrom(self, with: splitRatio, in: containerView)
     self.alpha = 0
     
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveEaseOut,
+    UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseOut,
       animations: {
         fragments.forEach {
           
@@ -77,9 +77,9 @@ extension Explodable where Self:UIView {
           let explodeAngle = random(from: -CGFloat(M_PI)*goldenRatio, to: CGFloat(M_PI)*goldenRatio)
           let scale = 0.01 + random(from: 0.01, to: goldenRatio)
           
-          let translateTransform = CGAffineTransformMakeTranslation(direction.dx, direction.dy)
-          let angleTransform = CGAffineTransformRotate(translateTransform, explodeAngle)
-          let scaleTransform = CGAffineTransformScale(angleTransform, scale, scale)
+          let translateTransform = CGAffineTransform(translationX: direction.dx, y: direction.dy)
+          let angleTransform = translateTransform.rotated(by: explodeAngle)
+          let scaleTransform = angleTransform.scaledBy(x: scale, y: scale)
           
           $0.transform = scaleTransform
           $0.alpha = 0
@@ -107,13 +107,13 @@ extension Explodable where Self:UITableView {
    - Parameter direction: The explode direction, default is _ExplodeDirection.Chaos_
    - Parameter completion: A closure to be executed when the animation sqquence ends, also you should update the dataSource here
    */
-  func explodeRowAtIndexPath(indexPath:NSIndexPath, duration:Double, direction:ExplodeDirection = .Chaos, completion:()->Void) {
+  func explodeRowAtIndexPath(_ indexPath:IndexPath, duration:Double, direction:ExplodeDirection = .chaos, completion:@escaping ()->Void) {
     
     if self.exploding == true {
       return
     }
     
-    guard let cell = self.cellForRowAtIndexPath(indexPath) else { return }
+    guard let cell = self.cellForRow(at: indexPath) else { return }
     if cell.backgroundView == nil {
       cell.backgroundView = UIView()
     }
@@ -121,7 +121,7 @@ extension Explodable where Self:UITableView {
     let fragments = generateFragmentsFrom(cell, with: 10, in: cell)
     cell.contentView.alpha = 0
     
-    UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.CurveLinear,
+    UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveLinear,
       animations: {
         self.exploding = true
         fragments.forEach {
@@ -130,9 +130,9 @@ extension Explodable where Self:UITableView {
           let explodeAngle = random(from: -CGFloat(M_PI)*goldenRatio, to: CGFloat(M_PI)*goldenRatio)
           let scale = 0.01 + random(from: 0.01, to: goldenRatio)
           
-          let translateTransform = CGAffineTransformMakeTranslation(direction.dx, direction.dy)
-          let angleTransform = CGAffineTransformRotate(translateTransform, explodeAngle)
-          let scaleTransform = CGAffineTransformScale(angleTransform, scale, scale)
+          let translateTransform = CGAffineTransform(translationX: direction.dx, y: direction.dy)
+          let angleTransform = translateTransform.rotated(by: explodeAngle)
+          let scaleTransform = angleTransform.scaledBy(x: scale, y: scale)
           
           $0.transform = scaleTransform
           $0.alpha = 0
@@ -150,7 +150,7 @@ extension Explodable where Self:UITableView {
         CATransaction.setCompletionBlock {
           cell.contentView.alpha = 1
         }
-        self.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        self.deleteRows(at: [indexPath], with: .none)
         CATransaction.commit()
         
         self.exploding = false
@@ -165,11 +165,11 @@ extension Explodable where Self:UITableView {
 /// Add a `explosing` variation to UITableView in runtime
 private extension UITableView {
   
-  private struct AssociatedKeys {
+  struct AssociatedKeys {
     static var associatedName = "exploding"
   }
   
-  private var exploding:Bool {
+  var exploding:Bool {
     get {
       guard let exploding = objc_getAssociatedObject(self, &AssociatedKeys.associatedName) as? Bool else { return false }
       return exploding
@@ -184,24 +184,26 @@ private extension UITableView {
 private let goldenRatio = CGFloat(0.625)
 private let splitRatio = CGFloat(10)
 
-private func generateFragmentsFrom(originView:UIView, with splitRatio:CGFloat, in containerView:UIView) -> [UIView] {
+private func generateFragmentsFrom(_ originView:UIView, with splitRatio:CGFloat, in containerView:UIView) -> [UIView] {
   
   let size = originView.frame.size
-  let snapshots = originView.snapshotViewAfterScreenUpdates(true)
+  let snapshots = originView.snapshotView(afterScreenUpdates: true)
   var fragments = [UIView]()
-  
+	
+	print("Snapshots:\(snapshots) from \(originView)")
+	
   let shortSide = min(size.width, size.height)
   let gap = max(20, shortSide/splitRatio)
   
-  for x in 0.0.stride(to: Double(size.width), by: Double(gap)) {
-    for y in 0.0.stride(to: Double(size.height), by: Double(gap)) {
+  for x in stride(from: 0.0, to: Double(size.width), by: Double(gap)) {
+    for y in stride(from: 0.0, to: Double(size.height), by: Double(gap)) {
 
       let fragmentRect = CGRect(x: CGFloat(x), y: CGFloat(y), width: size.width/splitRatio, height: size.width/splitRatio)
-      let fragment = snapshots.resizableSnapshotViewFromRect(fragmentRect, afterScreenUpdates: false, withCapInsets: UIEdgeInsetsZero)
+      let fragment = snapshots?.resizableSnapshotView(from: fragmentRect, afterScreenUpdates: false, withCapInsets: UIEdgeInsets.zero)
       
-      fragment.frame = originView.convertRect(fragmentRect, toView: containerView)
-      containerView.addSubview(fragment)
-      fragments.append(fragment)
+      fragment?.frame = originView.convert(fragmentRect, to: containerView)
+      containerView.addSubview(fragment!)
+      fragments.append(fragment!)
       
     }
   }

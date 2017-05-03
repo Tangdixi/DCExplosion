@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-var directions = [ExplodeDirection.Left, ExplodeDirection.Top, ExplodeDirection.Right, ExplodeDirection.Bottom, ExplodeDirection.Chaos]
+var directions = [ExplodeDirection.left, ExplodeDirection.top, ExplodeDirection.right, ExplodeDirection.bottom, ExplodeDirection.chaos]
 
 class ViewController: UIViewController {
   
@@ -26,17 +26,17 @@ class ViewController: UIViewController {
     }
   }
   
-  @IBAction func explodeDirectionChanged(sender: AnyObject) {
+  @IBAction func explodeDirectionChanged(_ sender: AnyObject) {
     guard let segment = sender as? UISegmentedControl else { return }
     direction = directions[segment.selectedSegmentIndex]
   }
   
-  @IBAction func explodeDurationChanged(sender: AnyObject) {
+  @IBAction func explodeDurationChanged(_ sender: AnyObject) {
     guard let slider = sender as? UISlider else { return }
     duration = Double(slider.value)
   }
   
-  @IBAction func explode(sender: AnyObject) {
+  @IBAction func explode(_ sender: AnyObject) {
     imageView.explode(direction, duration: duration) {
       self.bottomView.addSubview(self.imageView)
     }
