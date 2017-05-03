@@ -1,4 +1,4 @@
-#DCExplosion
+# DCExplosion
 
 ![DemoGif](https://raw.githubusercontent.com/Tangdixi/DCExplosion/master/DCExplosion.gif)
 
@@ -16,7 +16,7 @@ git clone git@github.com:Tangdixi/DCExplosion.git
 Drag the **Source** into your project.  
 Well, it is strongly recommended that you install via [**CocoaPods**](https://cocoapods.org)
 
-##Usage
+## Usage
 * Conform the protocol 
 ```swift
 extension UIView:Explodable { }
@@ -42,18 +42,18 @@ tableView.explodeRowAtIndexPath(indexPath, duration:1 ,direction: .Chaos) {
 }
 ```  
 
-##Documentation
+## Documentation
 **Xcode Quick Help Documentation Supported** 
 
-##Bug, Suggestions
+## Bug, Suggestions
 
 Just open an [issue](https://github.com/Tangdixi/DCExplosion/issues) ~ 
 
-##TODO
+## TODO
 *  Remove a UICollectionCell with explode animation
 *  More than explosion style
 
-##License
+## License
 
 **DCExplosion** is available under the MIT license. See the LICENSE file for more info.
 
